@@ -3,44 +3,53 @@
 
 <head>
   <title>Spell Check</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <h1>Spell Check Assignment</h1>
   <hr>
-  <h2>Single Word Spell Check</h2>
-  <p>Enter a Word: <input type="text" id="word"></p>
+ 
 <section>
-    <form method="GET">
-      <input type="text" name="word-in">
-      <selection>
-        <option name="word-linear">Spell Check A Word (linear)</option>
-        <option name="word-binary">Spell Check A Word (Binary)</option>
-        <option name="alice-linear">Check Alice (Linear)</option>
-        <option name="alice-binary">Check Alice (Binary)</option>
-      </selection>
+    <form action="spellCheck.php" method="GET">
+      <label>Enter A Word:</label>
+      <input type="text" name="word-in"><br><br>
+      <select name="selection">
+        <option value="word-linear">Spell Check A Word (linear)</option>
+        <option value="word-binary">Spell Check A Word (Binary)</option>
+        <option value="alice-linear">Check Alice (Linear)</option>
+        <option value="alice-binary">Check Alice (Binary)</option>
+      </select>
+      <input type="submit" name="submit" value='submit'>
     </form>
 </section>
-  <h2>Alice in Wonderland Spell Check</h2>
 
 <?php
-$alice = file("data-files/alice-in-wonderland", NULL);
-$dictionary = file("data-files/dictionary", NULL);
+// load files into array (separated by whitespace)
+$alice = "data-files/alice-in-wonderland.txt";
+$cont = file_get_contents($alice);
+$aliceArr = explode(" ", $cont);
+
+$dictionary = "data-files/dictionary.txt";
+$cont2 = file_get_contents($dictionary);
+$dictionaryArr = explode(" ", $cont2);
+
 $in = $_GET['word-in'];
-switch (isset()) {
-  case $_GET['word-linear']:
-    linear($dictionary, $in);
+$s = $_GET['selection'];
+if (isset($_GET['submit'])){
+switch ($s) {
+  case 'word-linear':
+    linear($dictionaryArr, $in);
     break;
-  case $_GET['word-binary']:
-    binary($dictionary, $in);
+  case 'word-binary':
+    binary($dictionaryArr, $in);
     break;
-  case $_GET['alice-linear']:
-    linear($alice, $in);
+  case 'alice-linear':
+    linear($aliceArr, $in);
     break;
-  case $_GET['alice-binary']:
-    binary($alice, $in);
+  case 'alice-binary':
+    binary($aliceArr, $in);
     break;
+}
 }
 
 function linear($arr, $item) {
@@ -69,6 +78,6 @@ function binary($arr, $item){
 }
 
 ?>
-</html>
 
 </body>
+</html>
