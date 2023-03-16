@@ -26,17 +26,17 @@
 <?php
 // load files into array (separated by whitespace)
 $alice = "data-files/alice-in-wonderland.txt";
-$cont = file_get_contents($alice);
+$cont = file_get_contents($alice, FILE_IGNORE_NEW_LINES);
 $aliceArr = explode(" ", $cont);
+var_dump($aliceArr);
+// load files into array (separated by line)
+$dictionaryArr = file("data-files/dictionary.txt");
 
-$dictionary = "data-files/dictionary.txt";
-$cont2 = file_get_contents($dictionary);
-$dictionaryArr = explode(" ", $cont2);
-
-$in = $_GET['word-in'];
-$s = $_GET['selection'];
 if (isset($_GET['submit'])){
-switch ($s) {
+  $in = $_GET['word-in'];
+  $s = $_GET['selection'];
+
+  switch ($s) {
   case 'word-linear':
     linear($dictionaryArr, $in);
     break;
@@ -57,7 +57,7 @@ function linear($arr, $item) {
     if ($value == $item){
         echo "exists in array at index ", $value;
     } 
-    // else do nothing
+    echo "does not exist in array";
 }
 }
 
