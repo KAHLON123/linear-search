@@ -14,20 +14,20 @@ function printArr($arr){
     }
 }
 
-$nums = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-$selectionNums = [6, 9, 2, 3, 5];
+$nums = [10, 70, 30, 100, 40, 45, 90, 80, 85];
 $words = ["dog","at", "good", "eye", "cat", "ball", "fish"];
 bubblesort($nums);
 bubblesort($words);
 function bubblesort($arr){ // problem: only iterates for index 0...
-    for ($n = 0; $n < count($arr) - 1; $n++) {
-        if ($arr[$n] > $arr[$n + 1]) {
-            $hold = $arr[$n];
-            $arr[$n] = $arr[$n + 1];
-            $arr[$n + 1] = $hold;
+    for ($i = 1; $i < count($arr); )
+        for ($n = 0; $n < count($arr) - 1; $n++) {
+            if ($arr[$n] > $arr[$n + 1]) {
+                $hold = $arr[$n];
+                $arr[$n] = $arr[$n + 1];
+                $arr[$n + 1] = $hold;
+            }
+        
         }
-    
-    }
     printArr($arr);
 }
 ?>
@@ -35,13 +35,20 @@ function bubblesort($arr){ // problem: only iterates for index 0...
 
 <h1>selection srod</h1>
 <?php
-function selectionSort($arr){
-    for ($n = 0; $n < count($arr) - 1; $n++) {
-        $fill = $arr[$n];
-        for ($n = 1; $n < count($arr) - 1; $n++) {
-            if ()
+selectionSort($words, count($words));
+function selectionSort($data, $count){
+    for ($i = 0; $i < $count - 1; $i++) {
+        $mid = $i;
+        for ($n = $i+1; $n < $count; $n++) {
+            if ($data[$n] < $data[$mid]) {
+                $mid=$n;
+            }
         }
+        $hold = $data[$mid];
+        $data[$mid] = $data[$i];
+        $data[$i]=$hold;
     }
+    printArr($data);
 }
 ?>
 </body>
