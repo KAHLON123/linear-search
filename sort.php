@@ -5,7 +5,6 @@
 </head>
 <body>
 
-
 <h1>bubblesorddd</h1>
 <?php
 function printArr($arr){
@@ -19,22 +18,22 @@ $words = ["dog","at", "good", "eye", "cat", "ball", "fish"];
 bubblesort($nums);
 bubblesort($words);
 function bubblesort($arr){ // problem: only iterates for index 0...
-    for ($i = 1; $i < count($arr); )
+    for ($i = 1; $i < count($arr);$i++ ) {
         for ($n = 0; $n < count($arr) - 1; $n++) {
             if ($arr[$n] > $arr[$n + 1]) {
                 $hold = $arr[$n];
                 $arr[$n] = $arr[$n + 1];
                 $arr[$n + 1] = $hold;
             }
-        
+            }
         }
     printArr($arr);
 }
 ?>
 
-
 <h1>selection srod</h1>
 <?php
+selectionSort($nums, count($nums));
 selectionSort($words, count($words));
 function selectionSort($data, $count){
     for ($i = 0; $i < $count - 1; $i++) {
