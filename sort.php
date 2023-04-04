@@ -17,7 +17,7 @@ $nums = [10, 70, 30, 100, 40, 45, 90, 80, 85];
 $words = ["dog","at", "good", "eye", "cat", "ball", "fish"];
 bubblesort($nums);
 bubblesort($words);
-function bubblesort($arr){ // problem: only iterates for index 0...
+function bubblesort($arr){
     for ($i = 1; $i < count($arr);$i++ ) {
         for ($n = 0; $n < count($arr) - 1; $n++) {
             if ($arr[$n] > $arr[$n + 1]) {
