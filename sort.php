@@ -35,19 +35,28 @@ function bubblesort($arr){
 <?php
 selectionSort($nums, count($nums));
 selectionSort($words, count($words));
-function selectionSort($data, $count){
+function selectionSort($arr, $count){
     for ($i = 0; $i < $count - 1; $i++) {
         $mid = $i;
         for ($n = $i+1; $n < $count; $n++) {
-            if ($data[$n] < $data[$mid]) {
-                $mid=$n;
+            if ($arr[$n] < $arr[$mid]) {
+                $mid = $n;
             }
         }
-        $hold = $data[$mid];
-        $data[$mid] = $data[$i];
-        $data[$i]=$hold;
+        $hold = $arr[$mid];
+        $arr[$mid] = $arr[$i];
+        $arr[$i]=$hold;
     }
     printArr($data);
+}
+?>
+
+<h1>Insertion Sort</h1>
+<?php
+insertionSort($words);
+insertionSort($nums);
+function insertionSort($arr){
+
 }
 ?>
 </body>
