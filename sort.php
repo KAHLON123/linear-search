@@ -53,10 +53,18 @@ function selectionSort($arr, $count){
 
 <h1>Insertion Sort</h1>
 <?php
-insertionSort($words);
-insertionSort($nums);
-function insertionSort($arr){
-
+insertionSort($words, count($words));
+insertionSort($nums, count($nums));
+function insertionSort($arr, $count){
+    for ($i = 1; $i < $count; $i++) {
+        $insert = $arr[$i];
+        $position = $i - 1;
+        while ($insert > $position) {
+              
+            $position--;
+        }
+    }
+    printArr($arr);
 }
 ?>
 </body>
