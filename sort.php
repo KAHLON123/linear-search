@@ -25,8 +25,8 @@ function bubblesort($arr){
                 $arr[$n] = $arr[$n + 1];
                 $arr[$n + 1] = $hold;
             }
-            }
         }
+    }
     printArr($arr);
 }
 ?>
@@ -45,9 +45,9 @@ function selectionSort($arr, $count){
         }
         $hold = $arr[$mid];
         $arr[$mid] = $arr[$i];
-        $arr[$i]=$hold;
+        $arr[$i] = $hold;
     }
-    printArr($data);
+    printArr($arr);
 }
 ?>
 
@@ -59,8 +59,8 @@ function insertionSort($arr, $count){
     for ($i = 1; $i < $count; $i++) {
         $insert = $arr[$i];
         $position = $i - 1;
-        while ($insert > $position) {
-              
+        while ([$insert]$insert > $position) {
+
             $position--;
         }
     }

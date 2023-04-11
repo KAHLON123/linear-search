@@ -2,12 +2,15 @@
 $randArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 anArray($randArray, 37);
 function anArray($arr, $item){
+    $out = -1;
     foreach($arr as &$value) {
         if ($value == $item){
-            echo "exists in array";
+            $out = 
+            
         } 
         // else do nothing
     }
+    return $out;
 }
 
 binarySearch($randArray, 2);
