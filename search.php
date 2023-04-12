@@ -1,20 +1,19 @@
 <?php
 $randArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-anArray($randArray, 37);
-function anArray($arr, $item){
-    $out = -1;
-    foreach($arr as &$value) {
-        if ($value == $item){
-            $out = 
-            
-        } 
-        // else do nothing
-    }
-    return $out;
-}
+// echo anArray($randArray, 2);
+// function anArray($arr, $item){
+//     $out = 0;
+//     for ($i = 0; $i < count($arr); $i++) {
+//         if ($item == $arr[$i]) {
+//         $out = $i;
+//         }
+//     }
+//     return $out;  
+// }
 
-binarySearch($randArray, 2);
+echo binarySearch($randArray, 11);
 function binarySearch($arr, $item){
+    $out = -1;
     $lowI = 0;
     $highI = sizeof($arr) - 1;
     while ($lowI<= $highI) {
@@ -24,9 +23,10 @@ function binarySearch($arr, $item){
         } elseif ($arr[$midI] < $item) {
             $lowI = $midI + 1;
         } else {
-            echo $midI;
+            $out = $midI;
             break;
         }
     }
+    return $out;
 }
 ?>

@@ -60,7 +60,7 @@ function insertionSort($arr, $count){
         $insert = $arr[$i];
         $position = $i - 1;
         while ([$insert]$insert > $position) {
-
+            
             $position--;
         }
     }

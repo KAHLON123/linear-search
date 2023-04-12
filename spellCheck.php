@@ -28,55 +28,64 @@
 $alice = "data-files/alice-in-wonderland.txt";
 $cont = file_get_contents($alice, FILE_IGNORE_NEW_LINES);
 $aliceArr = explode(" ", $cont);
-var_dump($aliceArr);
-// load files into array (separated by line)
 $dictionaryArr = file("data-files/dictionary.txt");
 
 if (isset($_GET['submit'])){
   $in = $_GET['word-in'];
   $s = $_GET['selection'];
-
   switch ($s) {
-  case 'word-linear':
-    linear($dictionaryArr, $in);
-    break;
-  case 'word-binary':
-    binary($dictionaryArr, $in);
-    break;
-  case 'alice-linear':
-    linear($aliceArr, $in);
-    break;
-  case 'alice-binary':
-    binary($aliceArr, $in);
-    break;
-}
-}
-
-function linear($arr, $item) {
-  foreach($arr as &$value) {
-    if ($value == $item){
-        echo "exists in array at index ", $value;
-    } 
-    echo "does not exist in array";
-}
-}
-
-function binary($arr, $item){
-  $lowI = 0;
-  $highI = sizeof($arr) - 1;
-  while ($lowI<= $highI) {
-      $midI = (int)floor(($lowI + $highI) / 2);
-      if ($arr[$midI] > $item) {
-          $highI = $midI - 1;
-      } elseif ($arr[$midI] < $item) {
-          $lowI = $midI + 1;
-      } else {
-          echo $midI;
-          break;
-      }
+    case 'word-linear':
+      $index = linear($dictionaryArr, $in);
+      display($index);
+      break;
+    case 'word-binary':
+      $index = binary($dictionaryArr, $in);
+      display($index);
+      break;
+    case 'alice-linear':
+      $index = linear($aliceArr, $in);
+      display($index);
+      break;
+    case 'alice-binary':
+      $index = binary($aliceArr, $in);
+      display($index);
+      break;
   }
 }
 
+function linear($arr, $item){
+    for ($i = 0; $i < count($arr); $i++) {
+        if ($item == $arr[$i]) {
+          return $i;
+        }
+    }
+    return -1;
+}
+
+function binary($arr, $item){
+    $lowI = 0;
+    $highI = sizeof($arr) - 1;
+    while ($lowI<= $highI) {
+        $midI = (int)floor(($lowI + $highI) / 2);
+        if ($arr[$midI] > $item) {
+            $highI = $midI - 1;
+        } elseif ($arr[$midI] < $item) {
+            $lowI = $midI + 1;
+        } else {
+            return $midI;
+        }
+    }
+    return -1;
+}
+
+function display($index){
+  if ($index == -1) {
+    echo "not found";
+  } else {
+    echo "found at index ", $index, ", time taken: ";
+    // $time, " seconds";
+  }
+}
 ?>
 
 </body>
