@@ -8,7 +8,7 @@
 <body>
   <h1>Spell Check Assignment</h1>
   <hr>
- 
+<h2>Part A</h2> 
 <section>
     <form action="spellCheck.php" method="GET">
       <label>Enter A Word:</label>
@@ -40,7 +40,7 @@ if (isset($_GET['submit'])){
       break;
     case 'word-binary':
       $index = binary($dictionaryArr, $in);
-      //display($index);
+      display($index);
       break;
     case 'alice-linear':
       $index = linear($aliceArr, $in);
@@ -53,10 +53,14 @@ if (isset($_GET['submit'])){
   }
 }
 
-function linear($arr, $item){
+function linear($arr, $rawItem){
+  $start = microtime(true);
+  $item = strtolower($rawItem);
     for ($i = 0; $i < count($arr); $i++) {
         if ($item == $arr[$i]) {
-          return $i;
+          $end = microtime(true);
+          $total = $end - $start;
+          return $i . " Time taken: " . $total;
         }
     }
     return -1;
@@ -64,21 +68,23 @@ function linear($arr, $item){
 
 function binary($arr, $rawItem){
     $item = strtolower($rawItem);
-    $st = microtime(true);
+    $start = microtime(true);
     $lowI = 0;
     $highI = sizeof($arr) - 1;
     while ($lowI <= $highI) {
         $midI = (int)floor(($lowI + $highI) / 2);
         if ($arr[$midI] == $item) {
-          return $midI;
+          $end = microtime(true);
+          $total = $end - $start;
+          return $midI . " Time taken: " . $total;
         } elseif ($arr[$midI] > $item) {
           $highI = $midI - 1;
         } else {
           $lowI = $midI + 1;
         }
     }
-    $ed = microtime(true);
-    $tt = $ed - $st;
+    $end = microtime(true);
+    $total = $end - $start;
     return -1;
 }
 
@@ -86,10 +92,40 @@ function display($index){
   if ($index == -1) {
     echo "not found";
   } else {
-    echo "found at index ", $index, ", time taken: " ;
+    echo "found at index ", $index;
   }
 }
 ?>
+<h2>Part B</h2>
+<section>
+    <form action="spellCheck.php" method="GET">
+      <label>How do you want to check Alice In Wonderland</label>
+      <select name="select">
+        <option value="linear">Linear</option>
+        <option value="binary">Binary</option>
+      </select>
+      <input type="submit" name="submit" value='submit'>
+    </form>
+</section>
+<?php
+if (isset($_GET['submit'])){
+  $in = $_GET['word-in'];
+  $s = $_GET['select'];
+  switch ($s) {
+    case 'linear':
+   
+      break;
+    case 'binary':
+     
+      break;
+  }
+}
+
+function checkAlice(){
+  
+}
+?>
+
 
 </body>
 </html>
