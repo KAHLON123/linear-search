@@ -25,10 +25,10 @@
 
 <?php
 // load files into array (separated by whitespace)
-$alice = "data-files/alice-in-wonderland.txt";
+$alice = "alice-in-wonderland.txt";
 $cont = file_get_contents($alice, FILE_IGNORE_NEW_LINES);
 $aliceArr = explode(" ", $cont);
-$dictionaryArr = file("data-files/dictionary.txt");
+$dictionaryArr = file("dictionary.txt", FILE_IGNORE_NEW_LINES);
 
 if (isset($_GET['submit'])){
   $in = $_GET['word-in'];
@@ -40,7 +40,7 @@ if (isset($_GET['submit'])){
       break;
     case 'word-binary':
       $index = binary($dictionaryArr, $in);
-      display($index);
+      //display($index);
       break;
     case 'alice-linear':
       $index = linear($aliceArr, $in);
@@ -62,19 +62,23 @@ function linear($arr, $item){
     return -1;
 }
 
-function binary($arr, $item){
+function binary($arr, $rawItem){
+    $item = strtolower($rawItem);
+    $st = microtime(true);
     $lowI = 0;
     $highI = sizeof($arr) - 1;
-    while ($lowI<= $highI) {
+    while ($lowI <= $highI) {
         $midI = (int)floor(($lowI + $highI) / 2);
-        if ($arr[$midI] > $item) {
-            $highI = $midI - 1;
-        } elseif ($arr[$midI] < $item) {
-            $lowI = $midI + 1;
+        if ($arr[$midI] == $item) {
+          return $midI;
+        } elseif ($arr[$midI] > $item) {
+          $highI = $midI - 1;
         } else {
-            return $midI;
+          $lowI = $midI + 1;
         }
     }
+    $ed = microtime(true);
+    $tt = $ed - $st;
     return -1;
 }
 
@@ -82,8 +86,7 @@ function display($index){
   if ($index == -1) {
     echo "not found";
   } else {
-    echo "found at index ", $index, ", time taken: ";
-    // $time, " seconds";
+    echo "found at index ", $index, ", time taken: " ;
   }
 }
 ?>
