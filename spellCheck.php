@@ -24,12 +24,10 @@
 
 <?php
 // load files into array (separated by whitespace)
-$alice = "alice-in-wonderland.txt";
+$alice = "data/alice-in-wonderland.txt";
 $cont = file_get_contents($alice, FILE_IGNORE_NEW_LINES);
 $aliceArr = explode(" ", $cont);
-$dictionaryArr = file("dictionary.txt", FILE_IGNORE_NEW_LINES);
-
-$wordsPresent = 0;
+$dictionaryArr = file("data/dictionary.txt", FILE_IGNORE_NEW_LINES);
 
 if (isset($_GET['submit'])){
   $in = $_GET['word-in'];
@@ -39,64 +37,65 @@ if (isset($_GET['submit'])){
       $start = microtime(true);
       $index = linear($dictionaryArr, strtolower($in));
       $end = microtime(true);
-      display($index);
+      $total = $end - $start;
+      display($index, $total);
       break;
     case 'word-binary':
+      $start = microtime(true);
       $index = binary($dictionaryArr, strtolower($in));
-      display($index);
+      $end = microtime(true);
+      $total = $end - $start;
+      display($index, $total);
       break;
     case 'alice-linear':
+      $wordsNotPresent = 0;
       for ($i = 0; $i < count($aliceArr); $i++){
-        $index = linear($dictionaryArr, $aliceArr[$i]);
-        if ($index != -1){
-          $wordsPresent++;
+        $index = linear($dictionaryArr, strtolower($aliceArr[$i]));
+        if ($index == -1){
+          $wordsNotPresent++;
         }
       }
-      echo $wordsPresent . "Words found in Alice and Wonderland";
+      echo $wordsNotPresent . " Words not found in Alice and Wonderland";
       break;
     case 'alice-binary':
-       
+      $wordsNotPresent = 0;
+      for ($i = 0; $i < count($aliceArr); $i++){
+        $index = binary($dictionaryArr, strtolower($aliceArr[$i]));
+        if ($index == -1){
+          $wordsNotPresent++;
+        }
+      }
+      echo $wordsNotPresent . " Words not found in Alice and Wonderland";
       break;
   }
 }
 
 function linear($arr, $item){
-  $start = microtime(true);
-  $item = strtolower($rtem);
     for ($i = 0; $i < count($arr); $i++) {
         if ($item == $arr[$i]) {
-          $end = microtime(true);
-          $total = $end - $start;
-          return $i . " Time taken: " . $total;
+          return $i;
         }
     }
     return -1;
 }
 
-function binary($arr, $rawItem){
-  $start = microtime(true);
-
-  $item = strtolower($rawItem);
+function binary($arr, $item){
   $lowI = 0;
   $highI = sizeof($arr) - 1;
   while ($lowI <= $highI) {
       $midI = (int)floor(($lowI + $highI) / 2);
       if ($arr[$midI] == $item) {
-        $end = microtime(true);
-        $total = $end - $start;
-        return $midI . " Time taken: " . $total;
+        return $midI;
       } elseif ($arr[$midI] > $item) {
         $highI = $midI - 1;
       } else {
         $lowI = $midI + 1;
       }
   }
-  $end = microtime(true);
-  $total = $end - $start;
   return -1;
 }
 
-function display($index){
+function display($index, $time){
   if ($index == -1) {
     echo "not found";
   } else {
