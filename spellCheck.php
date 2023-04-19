@@ -57,7 +57,7 @@ if (isset($_GET['submit'])){
         }
       }
       $end = microtime(true);
-      $end - $start = $total;
+      $total = $end - $start;
       echo $wordsNotPresent . " Words not found in Alice and Wonderland. Time taken: " . $total . "seconds.";
       break;
     case 'alice-binary':
@@ -70,7 +70,7 @@ if (isset($_GET['submit'])){
         }
       }
       $end = microtime(true);
-      $end - $start = $total;
+      $total = $end - $start;
       echo $wordsNotPresent . " Words not found in Alice and Wonderland. Time taken: " . $total . "seconds.";
       break;
   }

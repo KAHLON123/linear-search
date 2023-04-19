@@ -10,7 +10,6 @@
       Explore how long it takes various sort algorithms to sort different sets
       of data.
     </p>
-    <button id='submit' value='submit' type='submit'>brbrbrbrhwerhue</button>
   </body>
 </html>
 <?php
@@ -25,19 +24,15 @@ $randomArr = file("data/randomVal.txt");
 $reversedArr = file("data/reversedVal.txt");
 $uniqueArr = file("data/unique.txt");
 
-if (isset($_POST['submit'])){
-    switch ($s){
-        case "nearly-sorted":
-            break;
-        case "random-values":
-
-    }
-}
-
 // SORT FUNCTIONS
+$start = microtime(true);
+insertionSort($reversedArr);
+$end =  microtime(true);
+$total = $end - $start;
+echo $total;
 
 function bubbleSort($arr){
-    for ($i = 1; $i < count($arr);$i++ ) {
+    for ($i = 1; $i < count($arr); $i++ ) {
         for ($n = 0; $n < count($arr) - 1; $n++) {
             if ($arr[$n] > $arr[$n + 1]) {
                 $hold = $arr[$n];
@@ -73,5 +68,4 @@ function insertionSort($arr){
         }
     }
 }
-
 ?>
