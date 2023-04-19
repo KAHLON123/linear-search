@@ -48,6 +48,7 @@ if (isset($_GET['submit'])){
       display($index, $total);
       break;
     case 'alice-linear':
+      $start = microtime(true);
       $wordsNotPresent = 0;
       for ($i = 0; $i < count($aliceArr); $i++){
         $index = linear($dictionaryArr, strtolower($aliceArr[$i]));
@@ -55,9 +56,12 @@ if (isset($_GET['submit'])){
           $wordsNotPresent++;
         }
       }
-      echo $wordsNotPresent . " Words not found in Alice and Wonderland";
+      $end = microtime(true);
+      $end - $start = $total;
+      echo $wordsNotPresent . " Words not found in Alice and Wonderland. Time taken: " . $total . "seconds.";
       break;
     case 'alice-binary':
+      $start = microtime(true);
       $wordsNotPresent = 0;
       for ($i = 0; $i < count($aliceArr); $i++){
         $index = binary($dictionaryArr, strtolower($aliceArr[$i]));
@@ -65,7 +69,9 @@ if (isset($_GET['submit'])){
           $wordsNotPresent++;
         }
       }
-      echo $wordsNotPresent . " Words not found in Alice and Wonderland";
+      $end = microtime(true);
+      $end - $start = $total;
+      echo $wordsNotPresent . " Words not found in Alice and Wonderland. Time taken: " . $total . "seconds.";
       break;
   }
 }

@@ -25,7 +25,7 @@ $randomArr = file("data/randomVal.txt");
 $reversedArr = file("data/reversedVal.txt");
 $uniqueArr = file("data/unique.txt");
 
-isset($_POST['submit']){
+if (isset($_POST['submit'])){
     switch ($s){
         case "nearly-sorted":
             break;
