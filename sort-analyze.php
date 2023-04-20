@@ -26,7 +26,7 @@ $uniqueArr = file("data/unique.txt");
 
 // SORT FUNCTIONS
 $start = microtime(true);
-insertionSort($reversedArr);
+insertionSort($uniqueArr);
 $end =  microtime(true);
 $total = $end - $start;
 echo $total;
@@ -60,12 +60,12 @@ function insertionSort($arr){
     $count = count($arr);
     for ($i = 1; $i < $count; $i++) {
         $insert = $arr[$i];
-        $position = $i - 1;
-        while ($insert < $arr[$position] && $position >= 0) {
+        $position = $i-1;
+        while ($position >= 0 && $insert < $arr[$position]) {
             $arr[$position + 1] = $arr[$position];
-            $arr[$position] = $insert;
-            $position--;
+            $position = $position - 1;
         }
+        $arr[$position + 1] = $insert;
     }
 }
 ?>
