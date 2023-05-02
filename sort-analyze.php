@@ -26,7 +26,7 @@ $uniqueArr = file("data/unique.txt");
 
 // SORT FUNCTIONS
 $start = microtime(true);
-insertionSort($uniqueArr);
+bubbleSort($nearlyArr);
 $end =  microtime(true);
 $total = $end - $start;
 echo $total;
